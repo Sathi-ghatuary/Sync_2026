@@ -1,0 +1,12 @@
+{
+  "morning": ["morning", "sunrise", "dawn", "prabhat", "subah"],
+  "evening": ["evening", "sandhya", "sunset", "night", "shaam"],
+  "daily": ["daily", "pratidin", "everyday", "dainik", "rojana"],
+  "news": ["news", "samachar", "bulletin", "dispatch", "chronicle", "herald", "gazette", "akhbar"],
+  "business": ["business", "finance", "financial", "trade", "commerce", "vyapar"],
+  "sports": ["sports", "sport", "khel"],
+  "politics": ["politics", "political", "rajneeti", "sarkar"],
+  "technology": ["technology", "tech", "digital", "innovation"],
+  "health": ["health", "wellness", "medical", "swasthya"],
+  "national": ["national", "india", "bharat", "desh"]
+}

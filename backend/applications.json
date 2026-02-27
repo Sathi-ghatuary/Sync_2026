@@ -1,0 +1,96 @@
+{
+  "272aad3e-e73f-4920-bed2-f05c7972d298": {
+    "id": "272aad3e-e73f-4920-bed2-f05c7972d298",
+    "submitted_title": "Goodnews",
+    "user_email": "sathighatuary@gmail.com",
+    "status": "pending",
+    "similarity_score": 1.0,
+    "verification_probability": 0.0,
+    "violations": [],
+    "created_at": "2026-02-26T19:08:47.269384"
+  },
+  "44a413c4-c02c-4765-8951-9c9d41a7d530": {
+    "id": "44a413c4-c02c-4765-8951-9c9d41a7d530",
+    "submitted_title": "Hindu Indian Express",
+    "user_email": "test@example.com",
+    "status": "rejected",
+    "similarity_score": 1.0,
+    "verification_probability": 0.0,
+    "violations": [
+      {
+        "rule": "combination",
+        "message": "Title appears to combine existing titles 'The Hindu' and 'The Indian Express'"
+      },
+      {
+        "rule": "phonetic_similarity",
+        "message": "Title sounds very similar to existing title 'Hindu Indian Express'"
+      }
+    ],
+    "created_at": "2026-02-27T01:01:34.286389"
+  },
+  "12d99069-d0b3-4455-a7c8-eeb9612f5827": {
+    "id": "12d99069-d0b3-4455-a7c8-eeb9612f5827",
+    "submitted_title": "Sunrise Dispatch",
+    "user_email": "acceptance@example.com",
+    "status": "rejected",
+    "similarity_score": 0.9,
+    "verification_probability": 0.1,
+    "violations": [
+      {
+        "rule": "phonetic_similarity",
+        "message": "Title sounds very similar to existing title 'SUNRISE TIMES'"
+      },
+      {
+        "rule": "cross_language",
+        "message": "Title has same conceptual/cross-language meaning as existing title 'Morning Chronicle'"
+      }
+    ],
+    "created_at": "2026-02-27T01:06:25.776445"
+  },
+  "2da5aebe-ed11-420b-b636-20518bde8362": {
+    "id": "2da5aebe-ed11-420b-b636-20518bde8362",
+    "submitted_title": "india daily",
+    "user_email": "sathighatuary@gmail.com",
+    "status": "rejected",
+    "similarity_score": 1.0,
+    "verification_probability": 0.0,
+    "violations": [
+      {
+        "rule": "phonetic_similarity",
+        "message": "Title sounds very similar to existing title 'india daily'"
+      },
+      {
+        "rule": "periodicity",
+        "message": "Title adds periodicity token 'daily' to existing title 'india'"
+      },
+      {
+        "rule": "cross_language",
+        "message": "Title has same conceptual/cross-language meaning as existing title 'National Daily'"
+      }
+    ],
+    "created_at": "2026-02-27T01:14:05.902666"
+  },
+  "a1ea450b-ce00-46c6-807a-0df6e9ad1318": {
+    "id": "a1ea450b-ce00-46c6-807a-0df6e9ad1318",
+    "submitted_title": "india daily",
+    "user_email": "sathighatuary@gmail.com",
+    "status": "rejected",
+    "similarity_score": 1.0,
+    "verification_probability": 0.0,
+    "violations": [
+      {
+        "rule": "phonetic_similarity",
+        "message": "Title sounds very similar to existing title 'india daily'"
+      },
+      {
+        "rule": "periodicity",
+        "message": "Title adds periodicity token 'daily' to existing title 'india'"
+      },
+      {
+        "rule": "cross_language",
+        "message": "Title has same conceptual/cross-language meaning as existing title 'National Daily'"
+      }
+    ],
+    "created_at": "2026-02-27T01:45:48.123049"
+  }
+}
