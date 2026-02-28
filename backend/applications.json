@@ -92,5 +92,24 @@
       }
     ],
     "created_at": "2026-02-27T01:45:48.123049"
+  },
+  "6e1be5de-2d75-435b-b971-62793c8f84ae": {
+    "id": "6e1be5de-2d75-435b-b971-62793c8f84ae",
+    "submitted_title": "bharat times",
+    "user_email": "shilpimahato05@gmail.com",
+    "status": "rejected",
+    "similarity_score": 1.0,
+    "verification_probability": 0.0,
+    "violations": [
+      {
+        "rule": "phonetic_similarity",
+        "message": "Title sounds very similar to existing title 'BHARAT TIMES'"
+      },
+      {
+        "rule": "conceptual_theme",
+        "message": "Title conveys same conceptual theme as existing title 'THE BHARAT TIMES'"
+      }
+    ],
+    "created_at": "2026-02-28T08:36:15.731662"
   }
 }

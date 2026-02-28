@@ -183,3 +183,86 @@ def reset_database():
     verifier.invalidate_cache()
     return {"message": "Database reset successfully"}
 
+@app.post("/conflict-timeline")
+def get_conflict_timeline(request: TitleRequest):
+    """
+    Returns conflict ancestry chain for a given title.
+    Shows: root registered title → similar rejected applications → new title position
+    """
+    if not request.title or request.title.strip() == "":
+        raise HTTPException(status_code=400, detail="Title must be non-empty")
+
+    title = request.title.strip()
+
+    # Step 1: Get similar titles from ChromaDB
+    try:
+        query_res = verifier.collection.query(
+            query_texts=[title],
+            n_results=5,
+        )
+    except Exception:
+        return {"title": title, "conflict_chain": [], "rejected_siblings": [], "root_title": None}
+
+    if not query_res or not query_res.get("documents") or not query_res["documents"][0]:
+        return {"title": title, "conflict_chain": [], "rejected_siblings": [], "root_title": None}
+
+    similar_docs = query_res["documents"][0]
+    distances = query_res["distances"][0]
+    similarities = [round((1 - d) * 100, 1) for d in distances]
+
+    # Step 2: Find rejected applications that are similar to the same root titles
+    all_applications = list(db_manager.applications.values())
+    rejected_apps = [a for a in all_applications if a["status"] == "rejected"]
+
+    # Step 3: Build conflict chain
+    conflict_chain = []
+    for i, existing_title in enumerate(similar_docs):
+        if existing_title.lower() == title.lower():
+            continue
+        sim = similarities[i] if i < len(similarities) else 0
+
+        # Find rejected applications similar to this existing title
+        related_rejections = []
+        for app in rejected_apps:
+            app_title = app.get("submitted_title", "")
+            if app_title.lower() == title.lower():
+                continue
+            # Check if this rejected app was similar to the same root
+            app_violations = app.get("violations", [])
+            for v in app_violations:
+                msg = v.get("message", "") if isinstance(v, dict) else str(v)
+                if existing_title.lower() in msg.lower():
+                    related_rejections.append({
+                        "title": app_title,
+                        "rejected_at": app.get("created_at", ""),
+                        "similarity_score": round(app.get("similarity_score", 0) * 100, 1),
+                        "reason": msg[:80] + "..." if len(msg) > 80 else msg,
+                    })
+                    break
+
+        conflict_chain.append({
+            "root_title": existing_title,
+            "similarity_to_new": sim,
+            "related_rejections": related_rejections[:3],
+        })
+
+    # Step 4: Find root (highest similarity match)
+    root_title = similar_docs[0] if similar_docs else None
+    root_similarity = similarities[0] if similarities else 0
+
+    # Step 5: Count total conflict family size
+    total_rejected_in_family = sum(len(c["related_rejections"]) for c in conflict_chain)
+
+    return {
+        "title": title,
+        "root_title": root_title,
+        "root_similarity": root_similarity,
+        "conflict_chain": conflict_chain[:3],
+        "total_rejected_in_family": total_rejected_in_family,
+        "summary": (
+            f"'{title}' conflicts with root title '{root_title}' ({root_similarity}% similar). "
+            f"{total_rejected_in_family} previously rejected titles share the same conflict ancestry."
+            if root_title else "No significant conflicts found."
+        )
+    }
+

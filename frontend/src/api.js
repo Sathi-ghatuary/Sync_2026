@@ -20,6 +20,16 @@ export const titleApi = {
     }
   },
 
+  // Get conflict ancestry timeline
+  getConflictTimeline: async (title) => {
+    try {
+      const response = await api.post('/conflict-timeline', { title });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  },
+
   // Submit an application
   submitApplication: async (title, userEmail) => {
     try {

@@ -1,4 +1,5 @@
 import { CheckCircle2, AlertTriangle, TrendingDown, Shield } from 'lucide-react';
+import ConflictTimeline from './ConflictTimeline';
 
 export default function ResultsDisplay({ result }) {
   if (!result) return null;
@@ -164,6 +165,8 @@ export default function ResultsDisplay({ result }) {
             </div>
           )}
         </div>
+         {/* Conflict Ancestry Timeline */}
+         <ConflictTimeline title={result?.title} />
       </div>
     </div>
   );
