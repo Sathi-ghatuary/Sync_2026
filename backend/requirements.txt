@@ -8,3 +8,4 @@ scikit-learn
 spacy
 transformers
 sentence-transformers
+python-multipart
