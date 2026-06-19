@@ -1,10 +1,11 @@
 """
 Quick test script for the Title Verification API endpoints.
 """
+import os
 import requests
 import json
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
 
 def test_health():
     """Test health endpoint."""
@@ -128,4 +129,4 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("TEST SUITE COMPLETE")
     print("=" * 60)
-    print("\nAPI Documentation available at: http://127.0.0.1:8000/docs")
+    print(f"\nAPI Documentation available at: {BASE_URL}/docs")

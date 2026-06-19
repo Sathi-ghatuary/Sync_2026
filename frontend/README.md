@@ -193,7 +193,7 @@ npm run test
 ### Backend Connection Failed
 
 ```
-⚠️ Backend not connected. Make sure the API server is running at http://127.0.0.1:8000
+⚠️ Backend not connected. Make sure the API server is running (check VITE_API_URL in your .env)
 ```
 
 **Solution:**

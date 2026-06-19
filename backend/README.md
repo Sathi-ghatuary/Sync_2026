@@ -46,7 +46,7 @@ python -m app.scripts.seed
 python -m uvicorn app.main:app --reload
 ```
 
-Server runs at: `http://127.0.0.1:8000`
+Server runs at: `http://127.0.0.1:8000` (configurable via `API_URL` environment variable)
 API Docs: `http://127.0.0.1:8000/docs` (Swagger UI)
 
 ---
@@ -186,7 +186,7 @@ python -m app.scripts.seed
 
 ### Option 3: Bulk API Load
 ```bash
-curl -X POST "http://127.0.0.1:8000/database/ingest/bulk" \
+curl -X POST "$BASE_URL/database/ingest/bulk" \
   -H "Content-Type: application/json" \
   -d '{"titles": ["Title 1", "Title 2", "Title 3"]}'
 ```
@@ -199,25 +199,25 @@ curl -X POST "http://127.0.0.1:8000/database/ingest/bulk" \
 
 ```bash
 # Simple verification
-curl -X POST "http://127.0.0.1:8000/verify" \
+curl -X POST "$BASE_URL/verify" \
   -H "Content-Type: application/json" \
   -d '{"title": "Daily Sandhya"}'
 
 # Application submission
-curl -X POST "http://127.0.0.1:8000/application" \
+curl -X POST "$BASE_URL/application" \
   -H "Content-Type: application/json" \
   -d '{"title": "Morning Herald", "user_email": "user@example.com"}'
 
 # Get database stats
-curl "http://127.0.0.1:8000/database/stats"
+curl "$BASE_URL/database/stats"
 
 # Upload CSV
-curl -X POST "http://127.0.0.1:8000/database/ingest/csv" \
+curl -X POST "$BASE_URL/database/ingest/csv" \
   -F "file=@titles.csv"
 ```
 
 ### Using Postman/Insomnia
-1. Import the endpoints from Swagger UI: `http://127.0.0.1:8000/docs`
+1. Import the endpoints from Swagger UI: `$BASE_URL/docs`
 2. All endpoints are documented with examples
 
 ### Acceptance Test Suite
@@ -293,8 +293,8 @@ backend/
 The backend is CORS-enabled and ready to connect with your React frontend.
 
 ```javascript
-// Example React request
-const response = await fetch('http://127.0.0.1:8000/verify', {
+// Example React request (use import.meta.env.VITE_API_URL in production)
+const response = await fetch(`${BASE_URL}/verify`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ title: 'My Title' })
