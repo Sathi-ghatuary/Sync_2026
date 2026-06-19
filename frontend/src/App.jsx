@@ -34,7 +34,7 @@ function App() {
       {!isConnected && (
         <div className="bg-red-500 text-white py-3 text-center fixed w-full top-16 z-40">
           <p className="text-sm font-semibold">
-            ⚠️ Backend not connected. Make sure the API server is running at http://127.0.0.1:8000
+            ⚠️ Backend not connected. 
           </p>
         </div>
       )}
